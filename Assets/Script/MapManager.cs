@@ -33,9 +33,6 @@ public class MapManager : MonoBehaviour {
     //腳色捷徑
     public Transform hero;
 
-    //地圖動畫
-    public Animator ani;
-
     //地圖目前方塊
     public MapInfo[] mapData = new MapInfo[4];
 
@@ -60,7 +57,6 @@ public class MapManager : MonoBehaviour {
 
     public IEnumerator TranslateUp() {
         //重置位置
-        ani.Play("None");
         mapData[(int)MapPos.Start].transform.localPosition = new Vector3(-1.1f,0,-1.1f);
         mapData[(int)MapPos.Right].transform.localPosition = new Vector3(1.1f, 0, -1.1f);
         mapData[(int)MapPos.Up].transform.localPosition = new Vector3(-1.1f, 0, 1.1f);
@@ -147,6 +143,7 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
+        //重整座標
         MapInfo[] temp = new MapInfo[4];
         temp[(int)MapPos.Start] = mapData[(int)MapPos.Up];
         temp[(int)MapPos.Up] = mapData[(int)MapPos.Start];
@@ -154,6 +151,10 @@ public class MapManager : MonoBehaviour {
         temp[(int)MapPos.End] = mapData[(int)MapPos.Right];
 
         mapData = temp;
+
+        for(int i = 0; i < mapData.Length; i++) {
+            mapData[i].name = ((MapPos)i).ToString();
+        }
 
         //地圖向下
         t = 0f;
@@ -176,14 +177,18 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
+        //執行事件
+        EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
+
         yield return new WaitForSeconds(2);
+
+
 
         yield return 0;
     }
 
     public IEnumerator TranslateRight() {
         //回復位置
-        ani.Play("None");
         mapData[(int)MapPos.Start].transform.localPosition = new Vector3(-1.1f, 0, -1.1f);
         mapData[(int)MapPos.Right].transform.localPosition = new Vector3(1.1f, 0, -1.1f);
         mapData[(int)MapPos.Up].transform.localPosition = new Vector3(-1.1f, 0, 1.1f);
@@ -231,7 +236,6 @@ public class MapManager : MonoBehaviour {
         }
 
         mapData[(int)MapPos.Up].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
-        print(mapData[(int)MapPos.Up].transform.localPosition);
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -271,6 +275,7 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
+        //重整座標
         MapInfo[] temp = new MapInfo[4];
         temp[(int)MapPos.Start] = mapData[(int)MapPos.Right];
         temp[(int)MapPos.Up] = mapData[(int)MapPos.End];
@@ -278,6 +283,10 @@ public class MapManager : MonoBehaviour {
         temp[(int)MapPos.End] = mapData[(int)MapPos.Up];
 
         mapData = temp;
+
+        for(int i = 0; i < mapData.Length; i++) {
+            mapData[i].name = ((MapPos)i).ToString();
+        }
 
         //地圖向右
         t = 0f;
@@ -301,10 +310,10 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
-        yield return new WaitForSeconds(2);
+        //執行事件
+        EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
 
-        //觸發點點位上的事件
-        
+        yield return new WaitForSeconds(2);    
 
         yield return 0;
     }

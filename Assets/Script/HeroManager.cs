@@ -40,17 +40,6 @@ public class HeroManager : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        
-        if(Input.GetKeyDown(KeyCode.UpArrow)) {
-            MapManager.Instance.MapUp();
-        }
-        if(Input.GetKeyDown(KeyCode.RightArrow)) {
-            MapManager.Instance.MapRight();
-        }
-        
-	}
 
     //英雄初始化
     public void SetHeroCareer(HeroCareer job) {
@@ -64,16 +53,18 @@ public class HeroManager : MonoBehaviour {
             return;
         }
         item.Add(i);
+        //刷新UI狀態
+
     }
 
-    //勇失去得道具(return false表示沒有該項道具)
-    public bool HeroLostItem(int[] i) {
-        foreach(int obj in i) {
-            if(item.Contains(obj)) {
-                item.Remove(obj);
-            } else {
-                return false;
-            }
+    //勇者失去得道具(return false表示沒有該項道具)
+    public bool HeroLostItem(int i) {
+        if(item.Contains(i)) {
+            item.Remove(i);
+            //刷新UI狀態
+
+        } else {
+            return false;
         }
 
         return true;

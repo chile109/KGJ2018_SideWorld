@@ -68,11 +68,61 @@ public class EventManager : MonoBehaviour {
         EventData data = new EventData();
         data.Sn = Random.Range((int)50,100).ToString();
         data.Name = "Item Shop";
+        data.DescriptionGood = "哈哈哈";
+        data.GetMoney = 20;
+        data.got = new int[4] { -1, -1, -1, -1 };
+        data.Lost = new int[4] { -1, -1, -1, -1 };
         return data;
     }
 
-    //事件反應
-    public void PlayEvent(EventData data) {
+    //事件反應(False表示死亡，True表示可以繼續)
+    public bool PlayEvent(EventData data) {
+        //顯示壞結局用
+        bool goodDes = true;
+
+        //增加道具
+        foreach(int obj in data.got) {
+            if(obj != -1) {  
+                HeroManager.Instance.HeroGetItem(obj);
+            }
+        }
+
         //檢查事件是否需要物件
+        foreach(int obj in data.Lost) {
+            if(obj != -1) {  //一定沒有999，必死
+                if(HeroManager.Instance.HeroLostItem(obj) == false) {
+                    MainGameScript.Instance.gameOver = true;
+                    goodDes = false;
+                }
+            }
+        }
+
+        //增加金幣
+        HeroManager.Instance.money = HeroManager.Instance.money + data.GetMoney;
+
+        //檢查金幣是否足夠
+        if(HeroManager.Instance.money - data.LostMoney < 0) {
+            MainGameScript.Instance.gameOver = true;
+            goodDes = false;
+        } else {
+            HeroManager.Instance.money = HeroManager.Instance.money - data.LostMoney;
+        }
+
+        //強制死亡事件
+        if(data.DescriptionGood == "-1") {
+            goodDes = false;
+            MainGameScript.Instance.gameOver = true;
+        }
+
+        //顯示文本
+        if(goodDes) {
+            eventBoard.text = data.DescriptionGood;
+        } else {
+            eventBoard.text = data.DescriptionBad;
+        }
+
+        //狀態繼續推行
+        MainGameScript.Instance.pass = true;
+        return true;
     }
 }

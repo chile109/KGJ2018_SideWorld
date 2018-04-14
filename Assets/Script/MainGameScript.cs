@@ -2,11 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 //主要遊戲流程
 //利用一個主協程GameThread進行
 
 public class MainGameScript : MonoBehaviour {
+
+    //單例模式
+    private static MainGameScript instance = null;
+    public static MainGameScript Instance {
+        get {
+            // 還沒指定時就先尋找遊戲中有沒有⼀樣的
+            if(instance == null) {
+                instance = FindObjectOfType<MainGameScript>();
+            }
+            if(instance == null) {
+                print("找不到MainGameScript");
+            }
+            return instance;
+        }
+    }
 
     //標題畫面
     public RawImage titleImage;
@@ -18,10 +34,12 @@ public class MainGameScript : MonoBehaviour {
     public Text heroInfo;
 
     //驗證用參數
+    [NonSerialized]
     public bool pass = false;
+    public bool gameOver = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         //開啟協程
         StartCoroutine("GameThread");
 	}
@@ -78,6 +96,7 @@ public class MainGameScript : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(1);
+
         //背景淡出
         t = 1;
         while(t > 0) {
@@ -93,14 +112,11 @@ public class MainGameScript : MonoBehaviour {
             MapManager.Instance.mapData[i].eve = EventManager.Instance.GetEventData();
         }
         
-
         yield return new WaitForSeconds(2);
-
-        bool gameOver = false;
 
         //等待遊戲結束(GameOver)
         while(!gameOver) {
-            //等待玩家按按鈕
+            //等待玩家按按鈕(按下按鈕後會由MapManager執行Start上的MapInfo事件)
             while(!pass) {
                 if(Input.GetKeyDown(KeyCode.RightArrow)) {
                     MapManager.Instance.MapRight();
@@ -113,10 +129,15 @@ public class MainGameScript : MonoBehaviour {
                 yield return 0;
             }
             pass = false;
+
             //等待事件結束
             while(!pass) {
                 yield return 0;
             }
+            pass = false;
+
+            //勇者歲數+1
+            HeroManager.Instance.age += 1;
             yield return 0;
         }
 
