@@ -88,6 +88,12 @@ public class MainGameScript : MonoBehaviour {
             yield return 0;
         }
 
+        //設定初始格子的事件
+        for(int i = 1; i < MapManager.Instance.mapData.Length; i++) {
+            MapManager.Instance.mapData[i].eve = EventManager.Instance.GetEventData();
+        }
+        
+
         yield return new WaitForSeconds(2);
 
         bool gameOver = false;

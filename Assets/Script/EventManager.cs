@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //用來管理地圖事件的觸發,每次更新地圖時會向資料庫要資料
 
@@ -52,23 +53,26 @@ public class EventManager : MonoBehaviour {
             return instance;
         }
     }
-    
+
+    //事件顯示狀態版
+    public Text eventBoard;
 
 	// Use this for initialization
 	void Start () {
 		
 	}
-	/*
-	// Update is called once per frame
-	void Update () {
-		
-	}*/
+
 
     //向資料庫要資料
-    EventData GetEvent() {
+    public EventData GetEventData() {
         EventData data = new EventData();
         data.Sn = Random.Range((int)50,100).ToString();
         data.Name = "Item Shop";
         return data;
+    }
+
+    //事件反應
+    public void PlayEvent(EventData data) {
+        //檢查事件是否需要物件
     }
 }

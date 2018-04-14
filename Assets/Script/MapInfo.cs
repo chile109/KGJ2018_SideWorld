@@ -15,13 +15,13 @@ public class MapInfo : MonoBehaviour {
     //內藏事件
     public EventData eve;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //設定事件
+    public void SetEvent() {
+        eve = EventManager.Instance.GetEventData();
+    }
+
+    //播放事件
+	public void PlayEvent() {
+        EventManager.Instance.PlayEvent(eve);
+    }
 }

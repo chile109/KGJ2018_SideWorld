@@ -25,11 +25,14 @@ public class HeroManager : MonoBehaviour {
         }
     }
 
-    //英雄的年齡(走了多少步)
+    //勇者的年齡(走了多少步)
     public int age = 0;
 
-    //英雄的金錢
+    //勇者的金錢
     public int money = 0;
+
+    //勇者身上攜帶的道具
+    public List<int> item = new List<int>();
 
 
     // Use this for initialization
@@ -50,7 +53,30 @@ public class HeroManager : MonoBehaviour {
 	}
 
     //英雄初始化
-    void SetHeroCareer(HeroCareer job) {
+    public void SetHeroCareer(HeroCareer job) {
 
     }
+
+    //勇者獲得道具
+    public void HeroGetItem(int i) {
+        if(item.Contains(i)) {
+            print("已擁有道具");
+            return;
+        }
+        item.Add(i);
+    }
+
+    //勇失去得道具(return false表示沒有該項道具)
+    public bool HeroLostItem(int[] i) {
+        foreach(int obj in i) {
+            if(item.Contains(obj)) {
+                item.Remove(obj);
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

@@ -175,6 +175,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &170912281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 170912282}
+  - component: {fileID: 170912284}
+  - component: {fileID: 170912283}
+  m_Layer: 5
+  m_Name: 2_StoryBoard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &170912282
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170912281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1750293333}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -457.15, y: -366}
+  m_SizeDelta: {x: 1005.7, y: 260.3}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &170912283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170912281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 25
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 149
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u524D\u9762\u7684\u6751\u5B50\u597D\u50CF\u6B63\u5728\u8209\u8FA6\u6751\u9577\u9078\u8209\u7684\u6A23\u5B50\u3002\u54A6\uFF1F\u90A3\u500B\u5C0F\u5DF7\u5B50\u88E1\u597D\u50CF\u6709\u5169\u500B\u8A6D\u8A6D\u795F\u795F\u7684\u4EBA\u5F71\u4E0D\u77E5\u9053\u5728\u505A\u4EC0\u9EBC\uFF1F\u9760\u8FD1\u4E00\u9EDE\u597D\u4E86(\u8D70\u8FD1)\u3002\u6751\u6C11
+    A\uFF1A\u300C\u9019\u6B21\u7684\u9078\u8209\u5C31\u9EBB\u7169\u4F60\u4E86\u3002\u300D\u4E00\u908A\u8AAA\u9053\uFF0C\u4E00\u908A\u5C07\u5C0F\u7D19\u888B\u5077\u5077\u585E\u5728\u53E6\u4E00\u4F4D\u6751\u6C11\u624B\u4E0A\u3002\u6751\u6C11B\uFF1A\u300C\u6751\u9577\u4E00\u76F4\u4EE5\u4F86\u90FD\u662F\u6751\u6C11\u5011\u7684\u5076\u50CF\uFF0C\u773E\u671B\u6240\u6B78\u554A\uFF0C\u8AA0\u610F\u5341\u8DB3\u554A\uFF01\u300D\u4ED6\u5F9E\u63A9\u4E0D\u4F4F\u7B11\u5BB9\u7684\u53E3\u4E2D\u8AAA\u51FA\uFF0C\u4E00\u908A\u63A5\u4E0B\u5C0F\u7D19\u888B\u3002\u7A81\u7136\u6751\u6C11
+    A \u770B\u5230\u6211\u4E86\uFF0C\u5927\u53EB\uFF1A\u300C\u4F60\uFF01\u4F60\uFF01\u4F60\uFF01\u300D\u7136\u5F8C\u5411\u6211\u8DD1\u4E86\u904E\u4F86\uFF0C\u8D95\u7DCA\u4E5F\u585E\u4E86\u4E00\u500B\u5C0F\u7D19\u888B\u7D66\u6211\uFF0C\u4ED6\u9760\u8457\u6211\u7684\u8033\u908A\u7D30\u8AAA\uFF1A\u300C\u9019\u6A23\u4F60\u4E5F\u662F\u6211\u5011\u7684\u4E00\u4EFD\u5B50\u4E86\uFF01\u300D\uFF0C\u770B\u8457\u6751\u6C11
+    A\u3001B \u597D\u50CF\u4EC0\u9EBC\u4E8B\u90FD\u6C92\u767C\u751F\u904E\u7684\u6A23\u5B50\u96E2\u958B\uFF0C\u6211\u9ED8\u9ED8\u5730\u6253\u958B\u4E86\u7D19\u888B\uFF0C\u554A~~\u597D\u50CF\u6211\u61C2\u4E86\u4EC0\u9EBC\uFF01"
+--- !u!222 &170912284
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170912281}
 --- !u!1 &562101041
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +786,7 @@ RectTransform:
   m_Children:
   - {fileID: 1402088987}
   - {fileID: 1388036592}
+  - {fileID: 170912282}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
