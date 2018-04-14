@@ -156,7 +156,25 @@ public class MapManager : MonoBehaviour {
         mapData = temp;
 
         //地圖向下
-        ani.Play("MapMove_Up");
+        t = 0f;
+        Vector3[] oriP = new Vector3[4];
+        Vector3[] tarP = new Vector3[4];
+        for(int i = 0; i < mapData.Length; i++) {
+            oriP[i] = mapData[i].transform.localPosition;
+            tarP[i] = mapData[i].transform.localPosition;
+            tarP[i].z -= dis; 
+        }
+        while(t < 1) {
+            t += Time.deltaTime;
+            float per = Mathf.InverseLerp(0, 1, t);
+            Vector3 p = Vector3.Lerp(oriP[(int)MapPos.Start], tarP[(int)MapPos.Start], per);
+            p.y = 0.5f;
+            hero.transform.localPosition = p;
+            for(int i = 0; i < mapData.Length; i++) {
+                mapData[i].transform.localPosition = Vector3.Lerp(oriP[i],tarP[i],per);
+            }
+            yield return 0;
+        }
 
         yield return new WaitForSeconds(2);
 
@@ -261,7 +279,26 @@ public class MapManager : MonoBehaviour {
         mapData = temp;
 
         //地圖向右
-        ani.Play("MapMove_Right");
+        t = 0f;
+        Vector3[] oriP = new Vector3[4];
+        Vector3[] tarP = new Vector3[4];
+        
+        for(int i = 0; i < mapData.Length; i++) {
+            oriP[i] = mapData[i].transform.localPosition;
+            tarP[i] = mapData[i].transform.localPosition;
+            tarP[i].x -= dis;
+        }
+        while(t < 1) {
+            t += Time.deltaTime;
+            float per = Mathf.InverseLerp(0, 1, t);
+            Vector3 p = Vector3.Lerp(oriP[(int)MapPos.Start], tarP[(int)MapPos.Start], per);
+            p.y = 0.5f;
+            hero.transform.localPosition = p;
+            for(int i = 0; i < mapData.Length; i++) {
+                mapData[i].transform.localPosition = Vector3.Lerp(oriP[i], tarP[i], per);
+            }
+            yield return 0;
+        }
 
         yield return new WaitForSeconds(2);
 
