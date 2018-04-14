@@ -39,12 +39,14 @@ public class HeroManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
         if(Input.GetKeyDown(KeyCode.UpArrow)) {
             MapManager.Instance.MapUp();
         }
         if(Input.GetKeyDown(KeyCode.RightArrow)) {
             MapManager.Instance.MapRight();
         }
+        
 	}
 
     //英雄初始化

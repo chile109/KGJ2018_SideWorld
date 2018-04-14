@@ -58,12 +58,17 @@ public class EventManager : MonoBehaviour {
 	void Start () {
 		
 	}
-	
+	/*
 	// Update is called once per frame
 	void Update () {
 		
-	}
+	}*/
 
     //向資料庫要資料
-
+    EventData GetEvent() {
+        EventData data = new EventData();
+        data.Sn = Random.Range((int)50,100).ToString();
+        data.Name = "Item Shop";
+        return data;
+    }
 }

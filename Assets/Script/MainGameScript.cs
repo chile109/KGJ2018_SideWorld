@@ -46,7 +46,7 @@ public class MainGameScript : MonoBehaviour {
             yield return 0;
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
 
         //顯示英雄的描述
         t = 0;
@@ -77,8 +77,8 @@ public class MainGameScript : MonoBehaviour {
             yield return 0;
         }
 
-        yield return new WaitForSeconds(2);
-        //描述淡出
+        yield return new WaitForSeconds(1);
+        //背景淡出
         t = 1;
         while(t > 0) {
             t -= Time.deltaTime;
@@ -87,6 +87,35 @@ public class MainGameScript : MonoBehaviour {
             blackBack.color = c;
             yield return 0;
         }
+
+        yield return new WaitForSeconds(2);
+
+        bool gameOver = false;
+
+        //等待遊戲結束(GameOver)
+        while(!gameOver) {
+            //等待玩家按按鈕
+            while(!pass) {
+                if(Input.GetKeyDown(KeyCode.RightArrow)) {
+                    MapManager.Instance.MapRight();
+                    pass = true;
+                }
+                if(Input.GetKeyDown(KeyCode.UpArrow)) {
+                    MapManager.Instance.MapUp();
+                    pass = true;
+                }
+                yield return 0;
+            }
+            pass = false;
+            //等待事件結束
+            while(!pass) {
+                yield return 0;
+            }
+            yield return 0;
+        }
+
+        //顯示遊戲結束畫面
+        
 
     }
 

@@ -107,7 +107,7 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
-        mapData[(int)MapPos.Right].transform.Translate(0, 0, dis * 2);
+        mapData[(int)MapPos.Right].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -120,7 +120,7 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
-        mapData[(int)MapPos.Start].transform.Translate(0, 0, dis * 2);
+        mapData[(int)MapPos.Start].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Up].sp.sprite;
@@ -230,7 +230,8 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
-        mapData[(int)MapPos.Up].transform.Translate(dis * 2, 0, 0);
+        mapData[(int)MapPos.Up].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
+        print(mapData[(int)MapPos.Up].transform.localPosition);
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -243,7 +244,7 @@ public class MapManager : MonoBehaviour {
             yield return 0;
         }
 
-        mapData[(int)MapPos.Start].transform.Translate(dis * 2, 0, 0);
+        mapData[(int)MapPos.Start].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Right].sp.sprite;
@@ -302,7 +303,11 @@ public class MapManager : MonoBehaviour {
 
         yield return new WaitForSeconds(2);
 
+        //觸發點點位上的事件
+        
 
         yield return 0;
     }
+
+    
 }

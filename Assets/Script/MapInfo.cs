@@ -12,8 +12,8 @@ public class MapInfo : MonoBehaviour {
     //地圖上的掉落物
     public SpriteRenderer item;
 
-    //所屬座標
-    public Vector2 pos;
+    //內藏事件
+    public EventData eve;
 
 	// Use this for initialization
 	void Start () {
