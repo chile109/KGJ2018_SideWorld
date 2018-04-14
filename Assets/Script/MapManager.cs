@@ -36,13 +36,11 @@ public class MapManager : MonoBehaviour {
     //地圖動畫
     public Animator ani;
 
-
-    
     //地圖目前方塊
     public MapInfo[] mapData = new MapInfo[4];
 
     void Start () {
-        MapRight();
+
 	}
 	
 	// Update is called once per frame
