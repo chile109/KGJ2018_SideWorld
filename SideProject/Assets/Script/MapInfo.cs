@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //單塊地圖的資訊
-
+[System.Serializable]
 public class MapInfo : MonoBehaviour {
 
     //地圖使用的Sprite
