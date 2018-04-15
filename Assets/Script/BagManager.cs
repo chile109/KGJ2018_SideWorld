@@ -23,7 +23,7 @@ public class BagManager : MonoBehaviour
         foreach(var i in BagContents)
         {
             i.gameObject.name = _data.name;
-            i._Img.sprite = Resources.Load("item/" + _data.name) as Sprite;
+            i._Img.sprite = Resources.Load("item/" + _data.sn) as Sprite;
             i.gameObject.SetActive(true);
         }
     }
@@ -31,7 +31,7 @@ public class BagManager : MonoBehaviour
     {
         foreach (var i in BagContents)
         {
-            if (i.name == _data.name)
+            if (i.name == _data.sn)
             {
                 i.gameObject.name = "empty";
                 i._Img.sprite = null;
