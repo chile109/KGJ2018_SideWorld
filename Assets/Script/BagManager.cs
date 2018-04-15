@@ -24,9 +24,13 @@ public class BagManager : MonoBehaviour
     {
         foreach(var i in BagContents)
         {
-            i.gameObject.name = _data.name;
-            i._Img.sprite = Resources.Load("item/" + _data.sn) as Sprite;
-            i.gameObject.SetActive(true);
+            if (i.name == "empty")
+            {
+                i.gameObject.name = _data.name;
+                i._Img.sprite = Resources.Load("item/" + _data.sn) as Sprite;
+                i.gameObject.SetActive(true);
+                break;
+            }
         }
     }
     public bool LostItem(ItemData _data)
