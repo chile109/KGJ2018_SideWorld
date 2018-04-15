@@ -98,6 +98,7 @@ public class JsonLoader : MonoBehaviour {
                     _event.DescriptionGood = jsonData[i]["DescriptionGood"].ToString();
                     _event.DescriptionBad = jsonData[i]["DescriptionGood"].ToString();
 
+                    _event.got[0] = (int)jsonData[i]["Get0"];
                     _event.got[1] = (int)jsonData[i]["Get1"];
                     _event.got[2] = (int)jsonData[i]["Get2"];
                     _event.got[3] = (int)jsonData[i]["Get3"];
