@@ -64,7 +64,7 @@ public class BagManager : MonoBehaviour
 
                 Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn.ToString());
                 _icon.sprite = myImg;
-                string tmp = "你獲得了" + _data.name + "!";
+                string tmp = "你失去了" + _data.name + "!";
                 StartCoroutine(showLog(myImg, tmp));
                 return true;
             }
