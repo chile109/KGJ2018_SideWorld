@@ -1,0 +1,72 @@
+[
+  {
+    "Sn": 0,
+    "Name": "魯蛇",
+    "Description": "當初把我射在牆上就好了...",
+    "Money": 100,
+    "Item0": -1,
+    "Item1": -1,
+    "Item2": -1,
+    "Item3": -1
+  },
+  {
+    "Sn": 1,
+    "Name": "富二代",
+    "Description": "3歲自耕農，可惜我正在做夢",
+    "Money": 2000000,
+    "Item0": 0,
+    "Item1": 1,
+    "Item2": 2,
+    "Item3": 3
+  },
+  {
+    "Sn": 2,
+    "Name": "樵夫",
+    "Description": "金斧頭銀斧頭怎麼比得上米分糸工＿頭",
+    "Money": 500,
+    "Item0": 6,
+    "Item1": 7,
+    "Item2": 5,
+    "Item3": -1
+  },
+  {
+    "Sn": 3,
+    "Name": "工程師",
+    "Description": "上輩子做壞事，這輩子寫程式",
+    "Money": 5000,
+    "Item0": 14,
+    "Item1": -1,
+    "Item2": -1,
+    "Item3": -1
+  },
+  {
+    "Sn": 4,
+    "Name": "板橋金城武",
+    "Description": "打錯了，是板橋明金城",
+    "Money": 8700,
+    "Item0": -1,
+    "Item1": -1,
+    "Item2": -1,
+    "Item3": -1
+  },
+  {
+    "Sn": 5,
+    "Name": "變態",
+    "Description": "身為變態，女用內褲是隨身攜帶的",
+    "Money": 3000,
+    "Item0": 4,
+    "Item1": -1,
+    "Item2": -1,
+    "Item3": -1
+  },
+  {
+    "Sn": 6,
+    "Name": "遊戲開發者",
+    "Description": "參加 Kuso Game Jam 隔天出買早餐時被傳送到異世界，慘了，只帶了買早餐的錢。",
+    "Money": 49,
+    "Item0": 21,
+    "Item1": 4,
+    "Item2": 14,
+    "Item3": -1
+  }
+]

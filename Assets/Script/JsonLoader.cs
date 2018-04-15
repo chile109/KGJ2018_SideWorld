@@ -28,8 +28,11 @@ public class EventData
 
 public class PlayerData
 {
-    public string sn;
-    public string name;
+    public string Sn;
+    public string Name;
+    public string Description;
+    public int Money;
+    public int[] Item = new int[4];
 }
 
 public class JsonLoader : MonoBehaviour {
@@ -37,7 +40,6 @@ public class JsonLoader : MonoBehaviour {
     public static List<ItemData> ItemPool = new List<ItemData>();
     public static List<EventData> EventPool = new List<EventData>();
     public static List<PlayerData> refPool = new List<PlayerData>();
-
 
 	void Start ()
     {      
@@ -48,7 +50,7 @@ public class JsonLoader : MonoBehaviour {
         loadEvent();
         loadRef();
 
-        foreach (var i in EventPool)
+        foreach (var i in refPool)
         {
             Debug.Log(i.Name);
         }
@@ -122,9 +124,9 @@ public class JsonLoader : MonoBehaviour {
 
     private static void loadRef()
     {
-        if (Resources.Load("PlerRef") != null)
+        if (Resources.Load("Born") != null)
         {
-            TextAsset txt = (Resources.Load("PlerRef")) as TextAsset;
+            TextAsset txt = (Resources.Load("Born")) as TextAsset;
             JsonReader jsonary = new JsonReader(txt.text);
             var jsonData = JsonMapper.ToObject(jsonary);
 
@@ -132,8 +134,16 @@ public class JsonLoader : MonoBehaviour {
             {
                 PlayerData _ref = new PlayerData();
 
-                _ref.sn = jsonData[i].ToString();
-                _ref.name = jsonData[i]["Event"].ToString();
+                _ref.Sn = jsonData[i].ToString();
+                _ref.Name = jsonData[i]["Name"].ToString();
+                _ref.Description = jsonData[i]["Description"].ToString();
+                _ref.Money = (int) jsonData[i]["Money"];
+
+                _ref.Item[0] = (int)jsonData[i]["Item0"];
+                _ref.Item[1] = (int)jsonData[i]["Item1"];
+                _ref.Item[2] = (int)jsonData[i]["Item2"];
+                _ref.Item[3] = (int)jsonData[i]["Item3"];
+
 
                 refPool.Add(_ref);
 
