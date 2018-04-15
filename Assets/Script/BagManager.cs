@@ -27,7 +27,7 @@ public class BagManager : MonoBehaviour
             i.gameObject.SetActive(true);
         }
     }
-    public void LostItem(ItemData _data)
+    public bool LostItem(ItemData _data)
     {
         foreach (var i in BagContents)
         {
@@ -36,8 +36,13 @@ public class BagManager : MonoBehaviour
                 i.gameObject.name = "empty";
                 i._Img.sprite = null;
                 i.gameObject.SetActive(false);
+                return true;
+                break;
             }
+
         }
+
+        return false;
     }
 
     public void ClearImg()
