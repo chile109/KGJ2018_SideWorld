@@ -1,10 +1,13 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class BagManager : MonoBehaviour
 {
-
+    public GameObject Diolog;
+    public Image _icon;
+    public Text _log;
     public static BagManager _instant;
     public BagItem[] BagContents;
     // Use this for initialization
@@ -19,12 +22,20 @@ public class BagManager : MonoBehaviour
 
         ClearImg();
 
-        //GotItem(JsonLoader.ItemPool[0]);
     }
 
-	public void GotItem(ItemData _data)
+    IEnumerator showLog(Sprite myImg, string s)
     {
-        foreach(var i in BagContents)
+        _icon.sprite = myImg;
+        _log.text = s;
+        Diolog.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        Diolog.SetActive(false);
+    }
+
+    public void GotItem(ItemData _data)
+    {
+        foreach (var i in BagContents)
         {
             if (i.name == "empty")
             {
@@ -33,6 +44,10 @@ public class BagManager : MonoBehaviour
                 Debug.Log("item/" + _data.sn);
                 i._Img.sprite = myImg;
                 i.gameObject.SetActive(true);
+
+                _icon.sprite = myImg;
+                string tmp = "你獲得了" + _data.name + "!";
+                StartCoroutine(showLog(myImg, tmp));
                 break;
             }
         }
@@ -46,8 +61,12 @@ public class BagManager : MonoBehaviour
                 i.gameObject.name = "empty";
                 i._Img.sprite = null;
                 i.gameObject.SetActive(false);
+
+                Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn.ToString());
+                _icon.sprite = myImg;
+                string tmp = "你獲得了" + _data.name + "!";
+                StartCoroutine(showLog(myImg, tmp));
                 return true;
-                break;
             }
 
         }
