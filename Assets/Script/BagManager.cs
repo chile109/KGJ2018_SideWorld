@@ -27,7 +27,8 @@ public class BagManager : MonoBehaviour
             if (i.name == "empty")
             {
                 i.gameObject.name = _data.name;
-                i._Img.sprite = Resources.Load("item/" + _data.sn) as Sprite;
+                Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn);
+                i._Img.sprite = myImg;
                 i.gameObject.SetActive(true);
                 break;
             }
