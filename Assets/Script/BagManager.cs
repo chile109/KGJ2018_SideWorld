@@ -10,12 +10,14 @@ public class BagManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (_instant != null)
+        if (_instant == null)
         {
             BagManager._instant = this;
         }
 
         BagContents = this.gameObject.GetComponentsInChildren<BagItem>();
+
+        ClearImg();
     }
 
 	public void GotItem(ItemData _data)
