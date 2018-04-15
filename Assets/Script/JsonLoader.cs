@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 public class ItemData
 {
-    public string sn;
+    public int sn;
     public string name;
 }
 
 public class EventData
 {
-    public string Sn;
+    public int Sn;
     public string Name;
     public string DescriptionGood;
     public string DescriptionBad;
@@ -28,7 +28,7 @@ public class EventData
 
 public class PlayerData
 {
-    public string Sn;
+    public int Sn;
     public string Name;
     public string Description;
     public int Money;
@@ -41,7 +41,7 @@ public class JsonLoader : MonoBehaviour {
     public static List<EventData> EventPool = new List<EventData>();
     public static List<PlayerData> refPool = new List<PlayerData>();
 
-	void Start ()
+	void Awake ()
     {      
         //Debug.LogFormat("txt is {0}", txt.text);
         //Debug.LogFormat("Count = {0}", jsonData.Count);
@@ -68,7 +68,7 @@ public class JsonLoader : MonoBehaviour {
             {
                 ItemData _item = new ItemData();
 
-                _item.sn = jsonData[i].ToString();
+                _item.sn = (int) jsonData[i]["Sn"];
                 _item.name = jsonData[i]["Name"].ToString();
 
                 ItemPool.Add(_item);
@@ -93,7 +93,7 @@ public class JsonLoader : MonoBehaviour {
                 {
                     EventData _event = new EventData();
 
-                    _event.Sn = jsonData[i]["Sn"].ToString();
+                    _event.Sn = (int)jsonData[i]["Sn"];
                     _event.Name = jsonData[i]["Name"].ToString();
                     _event.DescriptionGood = jsonData[i]["DescriptionGood"].ToString();
                     _event.DescriptionBad = jsonData[i]["DescriptionGood"].ToString();
@@ -134,7 +134,7 @@ public class JsonLoader : MonoBehaviour {
             {
                 PlayerData _ref = new PlayerData();
 
-                _ref.Sn = jsonData[i].ToString();
+                _ref.Sn = (int)jsonData[i]["Sn"];
                 _ref.Name = jsonData[i]["Name"].ToString();
                 _ref.Description = jsonData[i]["Description"].ToString();
                 _ref.Money = (int) jsonData[i]["Money"];

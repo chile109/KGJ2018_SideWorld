@@ -18,6 +18,8 @@ public class BagManager : MonoBehaviour
         BagContents = this.gameObject.GetComponentsInChildren<BagItem>();
 
         ClearImg();
+
+        GotItem(JsonLoader.ItemPool[0]);
     }
 
 	public void GotItem(ItemData _data)
@@ -27,7 +29,8 @@ public class BagManager : MonoBehaviour
             if (i.name == "empty")
             {
                 i.gameObject.name = _data.name;
-                Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn);
+                Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn.ToString());
+                Debug.Log("item/" + _data.sn);
                 i._Img.sprite = myImg;
                 i.gameObject.SetActive(true);
                 break;
@@ -38,7 +41,7 @@ public class BagManager : MonoBehaviour
     {
         foreach (var i in BagContents)
         {
-            if (i.name == _data.sn)
+            if (i.name == _data.sn.ToString())
             {
                 i.gameObject.name = "empty";
                 i._Img.sprite = null;

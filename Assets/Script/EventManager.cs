@@ -66,7 +66,7 @@ public class EventManager : MonoBehaviour {
     //向資料庫要資料
     public EventData GetEventData() {
         EventData data = new EventData();
-        data.Sn = Random.Range((int)50,100).ToString();
+        data.Sn = Random.Range((int)50,100);
         data.Name = "Item Shop";
         data.DescriptionGood = "哈哈哈";
         data.GetMoney = 20;
