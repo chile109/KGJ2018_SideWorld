@@ -139,6 +139,12 @@ public class MainGameScript : MonoBehaviour {
             //勇者歲數+1
             HeroManager.Instance.age += 1;
             yield return 0;
+
+            //更新狀態版
+            PanelManager._inst._Age.text = HeroManager.Instance.age.ToString();
+            PanelManager._inst._Money.text = HeroManager.Instance.money.ToString();
+            PanelManager._inst._Job.text = "haha";
+
         }
 
         //顯示遊戲結束畫面

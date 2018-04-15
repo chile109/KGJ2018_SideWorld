@@ -66,12 +66,24 @@ public class EventManager : MonoBehaviour {
     //向資料庫要資料
     public EventData GetEventData() {
         EventData data = new EventData();
-        data.Sn = Random.Range((int)50,100);
-        data.Name = "Item Shop";
-        data.DescriptionGood = "哈哈哈";
-        data.GetMoney = 20;
-        data.got = new int[4] { -1, -1, -1, -1 };
-        data.Lost = new int[4] { -1, -1, -1, -1 };
+        bool canUse = false;
+        int age = HeroManager.Instance.age;
+        int count = 0;
+
+        while(!canUse) {
+            int r = Random.Range(0, JsonLoader.EventPool.Count);
+            //print(JsonLoader.EventPool[r].Name + " got[0]= " + JsonLoader.EventPool[r].got[0] ); 
+            if(JsonLoader.EventPool[r].MinAge < age || age <= JsonLoader.EventPool[r].MaxAge) {
+                data = JsonLoader.EventPool[r];
+                canUse = true;
+            }
+            count += 1;
+            if(count >30) {
+                canUse = true;
+            }
+
+        }
+        
         return data;
     }
 
@@ -79,18 +91,20 @@ public class EventManager : MonoBehaviour {
     public bool PlayEvent(EventData data) {
         //顯示壞結局用
         bool goodDes = true;
-
+        //print("Event" + data.Name);
+        //print("0 = " + data.got[0]);
         //增加道具
         foreach(int obj in data.got) {
-            if(obj != -1) {  
-                HeroManager.Instance.HeroGetItem(obj);
+           // print(obj);
+            if(obj != -1) {
+                BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
             }
         }
 
         //檢查事件是否需要物件
         foreach(int obj in data.Lost) {
             if(obj != -1) {  //一定沒有999，必死
-                if(HeroManager.Instance.HeroLostItem(obj) == false) {
+                if(BagManager._instant.LostItem(JsonLoader.ItemPool[obj]) == false) {
                     MainGameScript.Instance.gameOver = true;
                     goodDes = false;
                 }

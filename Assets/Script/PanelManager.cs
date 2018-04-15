@@ -11,9 +11,9 @@ public class PanelManager : MonoBehaviour {
     public Text _Money;
 
 
-	private void Start()
+	private void Awake()
 	{
-        if(_inst = null)
+        if(_inst == null)
         {
             _inst = this;
         }

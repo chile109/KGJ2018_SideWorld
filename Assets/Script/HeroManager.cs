@@ -4,10 +4,6 @@ using UnityEngine;
 
 //用來管理英雄身上的數值
 
-public enum HeroCareer {
-
-}
-
 public class HeroManager : MonoBehaviour {
 
     //單例模式
@@ -26,48 +22,32 @@ public class HeroManager : MonoBehaviour {
     }
 
     //勇者的年齡(走了多少步)
-    public int age = 0;
+    public int age = 15;
 
     //勇者的金錢
     public int money = 0;
 
-    //勇者身上攜帶的道具
-    public List<int> item = new List<int>();
+    //勇者的職業
+    public string job;
 
+    //職業的描述
+    public string dis;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        SetHeroCareer();
+
+    }
 	
-
     //英雄初始化
-    public void SetHeroCareer(HeroCareer job) {
-
-    }
-
-    //勇者獲得道具
-    public void HeroGetItem(int i) {
-        if(item.Contains(i)) {
-            print("已擁有道具");
-            return;
-        }
-        item.Add(i);
-        //刷新UI狀態
-
-    }
-
-    //勇者失去得道具(return false表示沒有該項道具)
-    public bool HeroLostItem(int i) {
-        if(item.Contains(i)) {
-            item.Remove(i);
-            //刷新UI狀態
-
-        } else {
-            return false;
-        }
-
-        return true;
+    public void SetHeroCareer() {
+        //隨機職業
+        int r = Random.Range(0,JsonLoader.refPool.Count);
+        job = JsonLoader.refPool[r].Name;
+        money = JsonLoader.refPool[r].Money;
+        PanelManager._inst._Job.text = JsonLoader.refPool[r].Name;
+        PanelManager._inst._Age.text = "15";
+        MainGameScript.Instance.heroInfo.text = JsonLoader.refPool[r].Description;
     }
 
 }

@@ -104,6 +104,8 @@ public class MapManager : MonoBehaviour {
         }
 
         mapData[(int)MapPos.Right].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
+        //要求新事件
+        mapData[(int)MapPos.Right].eve = EventManager.Instance.GetEventData();
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -117,6 +119,8 @@ public class MapManager : MonoBehaviour {
         }
 
         mapData[(int)MapPos.Start].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
+        //要求新事件
+        mapData[(int)MapPos.Start].eve = EventManager.Instance.GetEventData();
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Up].sp.sprite;
@@ -236,6 +240,8 @@ public class MapManager : MonoBehaviour {
         }
 
         mapData[(int)MapPos.Up].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
+        //要求新事件
+        mapData[(int)MapPos.Up].eve = EventManager.Instance.GetEventData();
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -249,6 +255,8 @@ public class MapManager : MonoBehaviour {
         }
 
         mapData[(int)MapPos.Start].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
+        //要求新事件
+        mapData[(int)MapPos.Start].eve = EventManager.Instance.GetEventData();
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Right].sp.sprite;

@@ -19,7 +19,7 @@ public class BagManager : MonoBehaviour
 
         ClearImg();
 
-        GotItem(JsonLoader.ItemPool[0]);
+        //GotItem(JsonLoader.ItemPool[0]);
     }
 
 	public void GotItem(ItemData _data)
