@@ -54,7 +54,7 @@ public class HeroManager : MonoBehaviour {
         //print("Item C = " + JsonLoader.refPool[r].Item.Length);
         foreach(int obj in JsonLoader.refPool[r].Item) {
             if(obj != -1) {
-                print(JsonLoader.ItemPool[obj].name);
+                //print(JsonLoader.ItemPool[obj].name);
                 BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
             }
             

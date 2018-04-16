@@ -73,8 +73,7 @@ public class EventManager : MonoBehaviour {
         int age = HeroManager.Instance.age;
         int count = 0;
 
-        //強制為使萊姆
-        //data = JsonLoader.EventPool[5];
+        
         
         while(!canUse) {
             int r = Random.Range(0, JsonLoader.EventPool.Count);
@@ -91,6 +90,9 @@ public class EventManager : MonoBehaviour {
             }
 
         }
+
+        //強制為使萊姆
+        //data = JsonLoader.EventPool[33];
 
         return data;
     }
@@ -113,14 +115,7 @@ public class EventManager : MonoBehaviour {
 
         //print("Event" + data.Name);
         //print("0 = " + data.got[0]);
-        //增加道具
-        foreach(int obj in data.got) {
-           // print(obj);
-            if(obj != -1) {
-                BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
-                MusicManager.order.PlaySound(4);
-            }
-        }
+        
 
         //檢查事件是否需要物件
         foreach(int obj in data.Lost) {
@@ -133,12 +128,6 @@ public class EventManager : MonoBehaviour {
             }
         }
 
-        //增加金幣
-        if(data.GetMoney > 0) {
-            MusicManager.order.PlaySound(6);
-            HeroManager.Instance.money = HeroManager.Instance.money + data.GetMoney;
-        }
-        
         //檢查金幣是否足夠
         if(HeroManager.Instance.money - data.LostMoney < 0) {
             MainGameScript.Instance.gameOver = true;
@@ -153,23 +142,80 @@ public class EventManager : MonoBehaviour {
             MainGameScript.Instance.gameOver = true;
         }
 
+        if(!MainGameScript.Instance.gameOver) {
+            //增加道具
+            foreach(int obj in data.got) {
+                // print(obj);
+                if(obj != -1) {
+                    BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
+                    MusicManager.order.PlaySound(4);
+                }
+            }
+
+            //增加金幣
+            if(data.GetMoney > 0) {
+                MusicManager.order.PlaySound(6);
+                HeroManager.Instance.money = HeroManager.Instance.money + data.GetMoney;
+            }
+        }
+        
+        
         //顯示整個狀態版
         board.SetActive(true);
 
         //顯示文本
         if(goodDes) {
+            //有大圖的話就秀出大圖
+            if(data.GoodPic == 1) {
+                Sprite myImg = Resources.Load<Sprite>("EventPic/" + data.Sn.ToString());
+                MainGameScript.Instance.eventPic.gameObject.SetActive(true);
+                MainGameScript.Instance.eventPic.sprite = myImg;
+
+            } else {
+                MainGameScript.Instance.eventPic.gameObject.SetActive(false);
+            }
+
+
             eventBoard.text = data.DescriptionGood;
             //更新人生足跡
-            MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲" + data.Name + "\n";
+            if(data.End != 0) {
+                MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲以後和魔王過著性福快樂的生活\n";
+                MainGameScript.Instance.lifeStep += "遊戲玩到True End是不允許的\n不過念在你有創意\n還是再玩一次吧";
+                MainGameScript.Instance.gameOver = true;
+            } else {
+                MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲" + data.Name + "\n";
+            }
+            
         } else {
-            eventBoard.text = data.DescriptionBad;
-            //死了
-            //更新人生足跡
-            MainGameScript.Instance.lifeStep += "然後" + HeroManager.Instance.age+ "歲就死了ㄏㄏ";
+            //有大圖的話就秀出大圖
+            if(data.BadPic == 1) {
+                Sprite myImg = Resources.Load<Sprite>("EventPic/" + data.Sn.ToString());
+                MainGameScript.Instance.eventPic.gameObject.SetActive(true);
+                MainGameScript.Instance.eventPic.sprite = myImg;
+
+            } else {
+                MainGameScript.Instance.eventPic.gameObject.SetActive(false);
+            }
+
+            if(BagManager._instant.LostItem(JsonLoader.ItemPool[24])) {
+                //無敵星星
+                eventBoard.text = data.DescriptionBad;
+                MainGameScript.Instance.gameOver = false;
+                MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲" + data.Name +"，被無敵星星救了!" +"\n";
+            } else {
+                eventBoard.text = data.DescriptionBad;
+                //死了
+                //更新人生足跡
+                MainGameScript.Instance.lifeStep += "然後" + HeroManager.Instance.age + "歲就死了ㄏㄏ";
+            }
+            
         }
+
 
         //狀態繼續推行
         //MainGameScript.Instance.pass = true;
         return true;
     }
+
+
 }

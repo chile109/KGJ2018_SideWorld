@@ -62,6 +62,12 @@ public class MainGameScript : MonoBehaviour {
         StartCoroutine("GameThread");
 	}
 
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
+    }
+
     public IEnumerator GameThread() {
         //等待滑鼠點擊
         while(!pass) {
@@ -142,7 +148,7 @@ public class MainGameScript : MonoBehaviour {
             MapManager.Instance.mapData[i].item.gameObject.SetActive(true);
         }
         
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.5f);
 
         //等待遊戲結束(GameOver)
         while(!gameOver) {
@@ -160,7 +166,9 @@ public class MainGameScript : MonoBehaviour {
             }
             pass = false;
 
-            t = 5;
+            yield return new WaitForSeconds(1);
+
+            t = 20;
 
             //等待事件結束或自己按下空白鍵
             while(!pass) {
@@ -183,8 +191,8 @@ public class MainGameScript : MonoBehaviour {
             PanelManager._inst._Age.text = HeroManager.Instance.age.ToString();
             PanelManager._inst._Money.text = HeroManager.Instance.money.ToString();
 
-            BagManager._instant.ShowBag();
-            print("--------");
+            /*BagManager._instant.ShowBag();
+            print("--------");*/
 
         }
 
@@ -196,6 +204,8 @@ public class MainGameScript : MonoBehaviour {
         tomb.SetActive(true);
         MusicManager.order.Stop();
         MusicManager.order.PlaySound(3);
+
+        yield return new WaitForSeconds(2);
 
         //等玩家按下空白鍵重來
         while(true) {
