@@ -65,7 +65,7 @@ public class MainGameScript : MonoBehaviour {
     public IEnumerator GameThread() {
         //等待滑鼠點擊
         while(!pass) {
-            if(Input.GetMouseButtonUp(0)) {
+            if(Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space)) {
                 pass = true;
             }
             yield return 0;
@@ -101,7 +101,7 @@ public class MainGameScript : MonoBehaviour {
 
         //等待滑鼠點擊
         while(!pass) {
-            if(Input.GetMouseButtonUp(0)) {
+            if(Input.GetMouseButtonUp(0) || Input.GetKeyDown(KeyCode.Space)) {
                 pass = true;
             }
             yield return 0;
@@ -119,7 +119,7 @@ public class MainGameScript : MonoBehaviour {
             yield return 0;
         }
 
-        yield return new WaitForSeconds(1);
+       // yield return new WaitForSeconds(1);
 
         //背景淡出
         t = 1;
@@ -148,11 +148,11 @@ public class MainGameScript : MonoBehaviour {
         while(!gameOver) {
             //等待玩家按按鈕(按下按鈕後會由MapManager執行Start上的MapInfo事件)
             while(!pass) {
-                if(Input.GetKeyDown(KeyCode.RightArrow)) {
+                if(Input.GetKeyDown(KeyCode.RightArrow) ||Input.GetKeyDown(KeyCode.D)) {
                     MapManager.Instance.MapRight();
                     pass = true;
                 }
-                if(Input.GetKeyDown(KeyCode.UpArrow)) {
+                if(Input.GetKeyDown(KeyCode.UpArrow ) || Input.GetKeyDown(KeyCode.W)) {
                     MapManager.Instance.MapUp();
                     pass = true;
                 }
@@ -160,8 +160,17 @@ public class MainGameScript : MonoBehaviour {
             }
             pass = false;
 
-            //等待事件結束
+            t = 5;
+
+            //等待事件結束或自己按下空白鍵
             while(!pass) {
+
+                t -= Time.deltaTime;
+                if(Input.GetKeyDown(KeyCode.Space) || t < 0) {
+                    pass = true;
+                    EventManager.Instance.board.SetActive(false);
+                    MusicManager.order.PlaySound(2);
+                }
                 yield return 0;
             }
             pass = false;
@@ -173,8 +182,6 @@ public class MainGameScript : MonoBehaviour {
             //更新狀態版
             PanelManager._inst._Age.text = HeroManager.Instance.age.ToString();
             PanelManager._inst._Money.text = HeroManager.Instance.money.ToString();
-
-            yield return new WaitForSeconds(3);
 
         }
 

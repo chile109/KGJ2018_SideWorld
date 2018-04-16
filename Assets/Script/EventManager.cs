@@ -97,8 +97,11 @@ public class EventManager : MonoBehaviour {
     public bool PlayEvent(EventData data) {
         //顯示壞結局用
         bool goodDes = true;
+
+        //有大圖的話就秀出大圖
         if(data.GoodPic ==1 || data.BadPic == 1) {
             Sprite myImg = Resources.Load<Sprite>("EventPic/" + data.Sn.ToString());
+            MainGameScript.Instance.eventPic.gameObject.SetActive(true);
             MainGameScript.Instance.eventPic.sprite = myImg;
             
         } else {
@@ -148,6 +151,9 @@ public class EventManager : MonoBehaviour {
             MainGameScript.Instance.gameOver = true;
         }
 
+        //顯示整個狀態版
+        board.SetActive(true);
+
         //顯示文本
         if(goodDes) {
             eventBoard.text = data.DescriptionGood;
@@ -160,12 +166,8 @@ public class EventManager : MonoBehaviour {
             MainGameScript.Instance.lifeStep += "然後" + HeroManager.Instance.age+ "歲就死了ㄏㄏ";
         }
 
-        
-
-        board.SetActive(true);
-
         //狀態繼續推行
-        MainGameScript.Instance.pass = true;
+        //MainGameScript.Instance.pass = true;
         return true;
     }
 }

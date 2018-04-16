@@ -33,6 +33,9 @@ public class MapManager : MonoBehaviour {
     //腳色捷徑
     public Transform hero;
 
+    //地圖塊淡出時間
+    public float mapOut = 0.1f;
+
     //地圖目前方塊
     public MapInfo[] mapData = new MapInfo[4];
 
@@ -79,7 +82,7 @@ public class MapManager : MonoBehaviour {
         MusicManager.order.PlaySound(8);
 
         while(t < 1) {
-            t += Time.deltaTime;
+            t += Time.deltaTime*2;
             //計算比例
             float per = Mathf.InverseLerp(0,1,t);
             
@@ -90,16 +93,12 @@ public class MapManager : MonoBehaviour {
         //播放動畫
         hero.GetComponent<Animator>().Play("Stop");
 
-        yield return new WaitForSeconds(1);
-
-        //移動方塊
-        yield return new WaitForSeconds(0.3f);
         //隱藏圖示
-        t = 0.3f;
+        t = mapOut;
         while(t > 0) {
             t -= Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Right].sp.color = c;
             yield return 0;
         }
@@ -112,13 +111,12 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Right].item.sprite = myImg;
         mapData[(int)MapPos.Right].item.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.3f);
         //隱藏圖示
-        t = 0.3f;
+        t = mapOut;
         while(t > 0) {
             t -= Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Start].sp.color = c;
             yield return 0;
         }
@@ -137,22 +135,21 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Right].sp.sprite = mapData[(int)MapPos.End].sp.sprite;
 
         //顯示新圖
-        yield return new WaitForSeconds(0.3f);
         t = 0f;
-        while(t < 0.35) {
+        while(t < mapOut) {
             t += Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Right].sp.color = c;
             yield return 0;
         }
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.1f);
         t = 0f;
-        while(t < 0.35) {
+        while(t < mapOut) {
             t += Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Start].sp.color = c;
             yield return 0;
         }
@@ -180,7 +177,7 @@ public class MapManager : MonoBehaviour {
             tarP[i].z -= dis; 
         }
         while(t < 1) {
-            t += Time.deltaTime;
+            t += Time.deltaTime*2;
             float per = Mathf.InverseLerp(0, 1, t);
             Vector3 p = Vector3.Lerp(oriP[(int)MapPos.Start], tarP[(int)MapPos.Start], per);
             p.y = 0.5f;
@@ -195,10 +192,6 @@ public class MapManager : MonoBehaviour {
         EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
         //隱藏小圖示
         mapData[(int)MapPos.Start].item.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(2);
-
-
 
         yield return 0;
     }
@@ -226,7 +219,7 @@ public class MapManager : MonoBehaviour {
         hero.GetComponent<Animator>().Play("HeroWalk");
 
         while(t < 1) {
-            t += Time.deltaTime;
+            t += Time.deltaTime*2;
             //計算比例
             float per = Mathf.InverseLerp(0, 1, t);
 
@@ -237,16 +230,12 @@ public class MapManager : MonoBehaviour {
         //播放動畫
         hero.GetComponent<Animator>().Play("Stop");
 
-        yield return new WaitForSeconds(1);
-
-        //移動方塊
-        yield return new WaitForSeconds(0.3f);
         //隱藏圖示
-        t = 0.3f;
+        t = mapOut;
         while(t > 0) {
             t -= Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Up].sp.color = c;
             yield return 0;
         }
@@ -260,13 +249,12 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Up].item.sprite = myImg;
         mapData[(int)MapPos.Up].item.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(0.3f);
         //隱藏圖示
-        t = 0.3f;
+        t = mapOut;
         while(t > 0) {
             t -= Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Start].sp.color = c;
             yield return 0;
         }
@@ -287,20 +275,19 @@ public class MapManager : MonoBehaviour {
         //顯示新圖
         yield return new WaitForSeconds(0.3f);
         t = 0f;
-        while(t < 0.35) {
+        while(t < mapOut) {
             t += Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Up].sp.color = c;
             yield return 0;
         }
 
-        yield return new WaitForSeconds(0.3f);
         t = 0f;
-        while(t < 0.35) {
+        while(t < mapOut) {
             t += Time.deltaTime;
             Color c = Color.white;
-            c.a = t * 3;
+            c.a = t * 10;
             mapData[(int)MapPos.Start].sp.color = c;
             yield return 0;
         }
@@ -329,7 +316,7 @@ public class MapManager : MonoBehaviour {
             tarP[i].x -= dis;
         }
         while(t < 1) {
-            t += Time.deltaTime;
+            t += Time.deltaTime*2;
             float per = Mathf.InverseLerp(0, 1, t);
             Vector3 p = Vector3.Lerp(oriP[(int)MapPos.Start], tarP[(int)MapPos.Start], per);
             p.y = 0.5f;
@@ -343,9 +330,7 @@ public class MapManager : MonoBehaviour {
         //執行事件
         EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
         //隱藏小圖示
-        mapData[(int)MapPos.Start].item.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(2);    
+        mapData[(int)MapPos.Start].item.gameObject.SetActive(false);   
 
         yield return 0;
     }
