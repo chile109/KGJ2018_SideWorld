@@ -183,6 +183,9 @@ public class MainGameScript : MonoBehaviour {
             PanelManager._inst._Age.text = HeroManager.Instance.age.ToString();
             PanelManager._inst._Money.text = HeroManager.Instance.money.ToString();
 
+            BagManager._instant.ShowBag();
+            print("--------");
+
         }
 
         //顯示遊戲結束畫面

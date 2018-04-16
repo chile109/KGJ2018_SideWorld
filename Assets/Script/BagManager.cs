@@ -24,6 +24,15 @@ public class BagManager : MonoBehaviour
 
     }
 
+    //顯示背包物件
+    public void ShowBag() {
+        foreach(var i in BagContents) {
+            if(i.name != "empty") {
+                print(i.name);
+            }
+        }
+    } 
+
     IEnumerator showLog(Sprite myImg, string s)
     {
         _icon.sprite = myImg;
@@ -41,7 +50,7 @@ public class BagManager : MonoBehaviour
             {
                 i.gameObject.name = _data.name;
                 Sprite myImg = Resources.Load<Sprite>("item/" + _data.sn.ToString());
-                Debug.Log("item/" + _data.sn);
+                //Debug.Log("item/" + _data.sn);
                 i._Img.sprite = myImg;
                 i.gameObject.SetActive(true);
 
@@ -56,7 +65,7 @@ public class BagManager : MonoBehaviour
     {
         foreach (var i in BagContents)
         {
-            if (i.name == _data.sn.ToString())
+            if (i.name == _data.name.ToString())
             {
                 i.gameObject.name = "empty";
                 i._Img.sprite = null;

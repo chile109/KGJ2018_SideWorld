@@ -79,13 +79,15 @@ public class EventManager : MonoBehaviour {
         while(!canUse) {
             int r = Random.Range(0, JsonLoader.EventPool.Count);
             //print(JsonLoader.EventPool[r].Name + " got[0]= " + JsonLoader.EventPool[r].got[0] ); 
-            if(JsonLoader.EventPool[r].MinAge < age || age <= JsonLoader.EventPool[r].MaxAge) {
+            print(JsonLoader.EventPool[r].MinAge +" <= "+ age +" < " + JsonLoader.EventPool[r].MaxAge+(JsonLoader.EventPool[r].MinAge < age && age <= JsonLoader.EventPool[r].MaxAge));
+            if(JsonLoader.EventPool[r].MinAge <= age && age < JsonLoader.EventPool[r].MaxAge) {
                 data = JsonLoader.EventPool[r];
                 canUse = true;
             }
             count += 1;
-            if(count >30) {
+            if(count >300) {
                 canUse = true;
+                print("fail");
             }
 
         }
