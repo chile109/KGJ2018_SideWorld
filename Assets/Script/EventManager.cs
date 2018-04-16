@@ -57,6 +57,9 @@ public class EventManager : MonoBehaviour {
     //事件顯示狀態版
     public Text eventBoard;
 
+    //狀態版
+    public GameObject board;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -70,6 +73,9 @@ public class EventManager : MonoBehaviour {
         int age = HeroManager.Instance.age;
         int count = 0;
 
+        //強制為使萊姆
+        //data = JsonLoader.EventPool[5];
+        
         while(!canUse) {
             int r = Random.Range(0, JsonLoader.EventPool.Count);
             //print(JsonLoader.EventPool[r].Name + " got[0]= " + JsonLoader.EventPool[r].got[0] ); 
@@ -83,7 +89,7 @@ public class EventManager : MonoBehaviour {
             }
 
         }
-        
+
         return data;
     }
 
@@ -91,6 +97,15 @@ public class EventManager : MonoBehaviour {
     public bool PlayEvent(EventData data) {
         //顯示壞結局用
         bool goodDes = true;
+        if(data.GoodPic ==1 || data.BadPic == 1) {
+            Sprite myImg = Resources.Load<Sprite>("EventPic/" + data.Sn.ToString());
+            MainGameScript.Instance.eventPic.sprite = myImg;
+            
+        } else {
+            MainGameScript.Instance.eventPic.gameObject.SetActive(false);
+        }
+        
+
         //print("Event" + data.Name);
         //print("0 = " + data.got[0]);
         //增加道具
@@ -98,6 +113,7 @@ public class EventManager : MonoBehaviour {
            // print(obj);
             if(obj != -1) {
                 BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
+                MusicManager.order.PlaySound(4);
             }
         }
 
@@ -107,13 +123,17 @@ public class EventManager : MonoBehaviour {
                 if(BagManager._instant.LostItem(JsonLoader.ItemPool[obj]) == false) {
                     MainGameScript.Instance.gameOver = true;
                     goodDes = false;
+                    MusicManager.order.PlaySound(5);
                 }
             }
         }
 
         //增加金幣
-        HeroManager.Instance.money = HeroManager.Instance.money + data.GetMoney;
-
+        if(data.GetMoney > 0) {
+            MusicManager.order.PlaySound(6);
+            HeroManager.Instance.money = HeroManager.Instance.money + data.GetMoney;
+        }
+        
         //檢查金幣是否足夠
         if(HeroManager.Instance.money - data.LostMoney < 0) {
             MainGameScript.Instance.gameOver = true;
@@ -131,9 +151,18 @@ public class EventManager : MonoBehaviour {
         //顯示文本
         if(goodDes) {
             eventBoard.text = data.DescriptionGood;
+            //更新人生足跡
+            MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲" + data.Name + "\n";
         } else {
             eventBoard.text = data.DescriptionBad;
+            //死了
+            //更新人生足跡
+            MainGameScript.Instance.lifeStep += "然後" + HeroManager.Instance.age+ "歲就死了ㄏㄏ";
         }
+
+        
+
+        board.SetActive(true);
 
         //狀態繼續推行
         MainGameScript.Instance.pass = true;

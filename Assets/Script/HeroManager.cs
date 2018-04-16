@@ -34,7 +34,8 @@ public class HeroManager : MonoBehaviour {
     public string dis;
 
     // Use this for initialization
-    void Start () {
+    IEnumerator Start () {
+        yield return new WaitForSeconds(0.1f);
         SetHeroCareer();
 
     }
@@ -47,7 +48,17 @@ public class HeroManager : MonoBehaviour {
         money = JsonLoader.refPool[r].Money;
         PanelManager._inst._Job.text = JsonLoader.refPool[r].Name;
         PanelManager._inst._Age.text = "15";
+        PanelManager._inst._Money.text = money.ToString();
+        
         MainGameScript.Instance.heroInfo.text = JsonLoader.refPool[r].Description;
+        //print("Item C = " + JsonLoader.refPool[r].Item.Length);
+        foreach(int obj in JsonLoader.refPool[r].Item) {
+            if(obj != -1) {
+                print(JsonLoader.ItemPool[obj].name);
+                BagManager._instant.GotItem(JsonLoader.ItemPool[obj]);
+            }
+            
+        }
     }
 
 }

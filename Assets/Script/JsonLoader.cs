@@ -49,10 +49,12 @@ public class JsonLoader : MonoBehaviour {
         loadItem();
         loadEvent();
         loadRef();
-
-        foreach (var i in refPool)
+        int count = 0;
+        foreach (var i in ItemPool)
         {
-            Debug.Log(i.Name);
+            
+            //Debug.Log(count +" = " +i.sn + " = "+ i.name);
+            count += 1;
         }
     }
 

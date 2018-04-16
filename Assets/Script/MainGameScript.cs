@@ -30,8 +30,26 @@ public class MainGameScript : MonoBehaviour {
     //背景黑幕
     public RawImage blackBack;
 
+    //製作組
+    public GameObject worker;
+
     //英雄描述
     public Text heroInfo;
+
+    //重新遊戲提示
+    public GameObject replayHint;
+
+    //事件狀態圖
+    public Image eventPic;
+
+    //人生足跡
+    public string lifeStep= "";
+
+    //人生版
+    public Text lifeBoard;
+
+    //墓碑
+    public GameObject tomb;
 
     //驗證用參數
     [NonSerialized]
@@ -52,6 +70,9 @@ public class MainGameScript : MonoBehaviour {
             }
             yield return 0;
         }
+
+        MusicManager.order.PlaySound(2);
+
         pass = false;
 
         //標題淡出
@@ -63,6 +84,8 @@ public class MainGameScript : MonoBehaviour {
             titleImage.color = c;
             yield return 0;
         }
+
+        worker.SetActive(false);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -83,6 +106,7 @@ public class MainGameScript : MonoBehaviour {
             }
             yield return 0;
         }
+        MusicManager.order.PlaySound(2);
         pass = false;
 
         //描述淡出
@@ -106,10 +130,16 @@ public class MainGameScript : MonoBehaviour {
             blackBack.color = c;
             yield return 0;
         }
+        MusicManager.order.Change(0);
+        MusicManager.order.Play();
 
         //設定初始格子的事件
         for(int i = 1; i < MapManager.Instance.mapData.Length; i++) {
             MapManager.Instance.mapData[i].eve = EventManager.Instance.GetEventData();
+            //依事件擺圖
+            Sprite myImg = Resources.Load<Sprite>("Event/" + MapManager.Instance.mapData[i].eve.Sn.ToString());
+            MapManager.Instance.mapData[i].item.sprite = myImg;
+            MapManager.Instance.mapData[i].item.gameObject.SetActive(true);
         }
         
         yield return new WaitForSeconds(2);
@@ -143,12 +173,28 @@ public class MainGameScript : MonoBehaviour {
             //更新狀態版
             PanelManager._inst._Age.text = HeroManager.Instance.age.ToString();
             PanelManager._inst._Money.text = HeroManager.Instance.money.ToString();
-            PanelManager._inst._Job.text = "haha";
+
+            yield return new WaitForSeconds(3);
 
         }
 
         //顯示遊戲結束畫面
-        
+        blackBack.color = Color.black;
+        replayHint.SetActive(true);
+        lifeBoard.text = lifeStep;
+        lifeBoard.gameObject.SetActive(true);
+        tomb.SetActive(true);
+        MusicManager.order.Stop();
+        MusicManager.order.PlaySound(3);
+
+        //等玩家按下空白鍵重來
+        while(true) {
+            if(Input.GetKeyDown(KeyCode.Space)) {
+                StopAllCoroutines();
+                Application.LoadLevel(0);
+            }
+            yield return 0;
+        }
 
     }
 

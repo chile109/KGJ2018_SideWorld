@@ -76,6 +76,7 @@ public class MapManager : MonoBehaviour {
 
         //播放動畫
         hero.GetComponent<Animator>().Play("HeroWalk");
+        MusicManager.order.PlaySound(8);
 
         while(t < 1) {
             t += Time.deltaTime;
@@ -106,6 +107,10 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Right].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
         //要求新事件
         mapData[(int)MapPos.Right].eve = EventManager.Instance.GetEventData();
+        //依事件擺圖
+        Sprite myImg = Resources.Load<Sprite>("Event/" + mapData[(int)MapPos.Right].eve.Sn.ToString());
+        mapData[(int)MapPos.Right].item.sprite = myImg;
+        mapData[(int)MapPos.Right].item.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -121,6 +126,11 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Start].transform.Translate(0, 0, dis * 2 * transform.localScale.x);
         //要求新事件
         mapData[(int)MapPos.Start].eve = EventManager.Instance.GetEventData();
+
+        //依事件擺圖
+        myImg = Resources.Load<Sprite>("Event/" + mapData[(int)MapPos.Start].eve.Sn.ToString());
+        mapData[(int)MapPos.Start].item.sprite = myImg;
+        mapData[(int)MapPos.Start].item.gameObject.SetActive(true);
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Up].sp.sprite;
@@ -183,6 +193,8 @@ public class MapManager : MonoBehaviour {
 
         //執行事件
         EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
+        //隱藏小圖示
+        mapData[(int)MapPos.Start].item.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2);
 
@@ -242,6 +254,11 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Up].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
         //要求新事件
         mapData[(int)MapPos.Up].eve = EventManager.Instance.GetEventData();
+        //依事件擺圖
+        
+        Sprite myImg = Resources.Load<Sprite>("Event/" + mapData[(int)MapPos.Up].eve.Sn.ToString());
+        mapData[(int)MapPos.Up].item.sprite = myImg;
+        mapData[(int)MapPos.Up].item.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(0.3f);
         //隱藏圖示
@@ -257,6 +274,11 @@ public class MapManager : MonoBehaviour {
         mapData[(int)MapPos.Start].transform.Translate(dis * 2 * transform.localScale.x, 0, 0);
         //要求新事件
         mapData[(int)MapPos.Start].eve = EventManager.Instance.GetEventData();
+
+        //依事件擺圖
+        myImg = Resources.Load<Sprite>("Event/" + mapData[(int)MapPos.Start].eve.Sn.ToString());
+        mapData[(int)MapPos.Start].item.sprite = myImg;
+        mapData[(int)MapPos.Start].item.gameObject.SetActive(true);
 
         //設定新材質
         mapData[(int)MapPos.Start].sp.sprite = mapData[(int)MapPos.Right].sp.sprite;
@@ -320,6 +342,8 @@ public class MapManager : MonoBehaviour {
 
         //執行事件
         EventManager.Instance.PlayEvent(mapData[(int)MapPos.Start].eve);
+        //隱藏小圖示
+        mapData[(int)MapPos.Start].item.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(2);    
 
