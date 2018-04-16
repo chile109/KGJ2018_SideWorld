@@ -182,6 +182,9 @@ public class EventManager : MonoBehaviour {
                 MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲以後和魔王過著性福快樂的生活\n";
                 MainGameScript.Instance.lifeStep += "遊戲玩到True End是不允許的\n不過念在你有創意\n還是再玩一次吧";
                 MainGameScript.Instance.gameOver = true;
+                MusicManager.order.Stop();
+                MusicManager.order.Change(1);
+                MusicManager.order.Play();
             } else {
                 MainGameScript.Instance.lifeStep += HeroManager.Instance.age + "歲" + data.Name + "\n";
             }
